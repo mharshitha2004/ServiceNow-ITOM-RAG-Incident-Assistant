@@ -82,23 +82,7 @@ This project is a **documentation-first** assistant. Every question goes to the 
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    U["User (Browser)"] --> FE["Next.js 16 Frontend<br/>Vercel"]
-    FE -- "HTTPS + session cookie" --> API["FastAPI Backend<br/>Docker on Render"]
-
-    API --> RAG["RAG Pipeline<br/>rag.py + retrieve.py"]
-    API --> AG["LangGraph Agent<br/>agent/graph.py"]
-    AG --> RAG
-    API --> DB[("MongoDB Atlas<br/>users, chats, GridFS images,<br/>LangGraph checkpoints")]
-
-    RAG --> EMB["all-MiniLM-L6-v2<br/>ONNX via fastembed"]
-    RAG --> PC[("Pinecone<br/>vectors + hosted reranker")]
-    RAG --> GEM["Google Gemini"]
-
-    AG -- "MCP (in-process)" --> MCP["MCP Server<br/>mcp_server/server.py"]
-    MCP -- "REST API" --> SN["ServiceNow Instance"]
-```
+![Architecture: Next.js frontend, FastAPI backend with RAG pipeline, LangGraph agent and in-process MCP server, plus Pinecone, Gemini, MongoDB and ServiceNow](docs/architecture.png)
 
 ---
 
@@ -106,15 +90,7 @@ flowchart LR
 
 ### Retrieval-augmented generation
 
-```mermaid
-flowchart LR
-    Q["Question<br/>+ image/log summary"] --> E["Embed<br/>MiniLM, 384-d"]
-    E --> S["Pinecone search<br/>top 30"]
-    S --> R["Rerank<br/>bge-reranker-v2-m3, top 6"]
-    R --> X["Expand context<br/>neighbouring chunks, max 24"]
-    X --> G["Gemini<br/>grounded prompt"]
-    G --> A["Markdown answer"]
-```
+![RAG pipeline: embed, Pinecone top 30, rerank top 6, expand to 24, Gemini](docs/rag-pipeline.png)
 
 | Stage | What happens |
 |---|---|
@@ -125,21 +101,7 @@ flowchart LR
 
 ### Incident agent
 
-```mermaid
-flowchart TD
-    START --> C{classify}
-    C -->|documentation| D[RAG answer] --> END1([END])
-    C -->|status / close / reopen| M[MCP tools] --> END1
-    C -->|problem report| I["Troubleshoot with RAG<br/>+ image / log analysis"]
-    I --> SAT{"Satisfied? ⏸"}
-    SAT -->|yes| END1
-    SAT -->|no| ASK{"Create incident? ⏸"}
-    ASK -->|no| END1
-    ASK -->|yes| P{"Priority? ⏸"}
-    P --> V{validate}
-    V -->|P3 / P4| CR["create_incident via MCP<br/>assign + attach files"] --> END1
-    V -->|P1 / P2 / invalid| B{"Blocked: pick P3/P4 ⏸"} --> V
-```
+![Incident agent: classify, troubleshoot, satisfied?, create incident?, priority, validate, create or blocked](docs/incident-agent.png)
 
 ⏸ marks a node that calls LangGraph's `interrupt()`. The graph pauses there and saves its state to MongoDB (`MongoDBSaver`), and the API returns `done: false` with quick-reply options. The user's next message resumes the graph with `Command(resume=answer)`. Because the state lives in MongoDB, a paused conversation survives server restarts and redeploys. If the server dies in the middle of a step, the checkpoint shows a pending step with no open question, and the conversation offers **Retry**, which re-runs that step safely.
 
@@ -228,7 +190,7 @@ flowchart TD
 ### 1. Clone
 
 ```bash
-git clone https://github.com/mharshitha2004/ServiceNow-ITOM-RAG-Incident-Assistant.git
+git clone https://github.com/harshitha2004-ml/Servicenow_ITOM.git
 cd Servicenow_ITOM
 ```
 
