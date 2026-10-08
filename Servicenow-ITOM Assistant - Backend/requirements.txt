@@ -1,0 +1,41 @@
+# Runtime dependencies for the deployed FastAPI backend.
+#
+# Deliberately does NOT include ingestion-only packages (pymupdf,
+# beautifulsoup4) - those are only ever run locally via the scripts in
+# ingestion/, never imported by main.py at request time. Keeping them out
+# of the deployed image matters more than usual here: Render's free tier
+# caps RAM at 512 MB, and every unused package is weight the container
+# carries for nothing. See requirements-ingestion.txt for those.
+
+# --- Web framework ---
+fastapi==0.142.2
+uvicorn[standard]==0.54.0
+python-multipart==0.0.32
+email-validator==2.3.0
+python-dotenv==1.2.4
+
+# --- Auth / database ---
+pymongo==4.17.0
+bcrypt==5.0.0
+pyjwt==2.15.1
+
+# --- LangGraph + MCP (incident flow) ---
+langgraph==1.2.12
+langgraph-checkpoint-mongodb==0.5.0
+mcp==2.2.0
+
+# --- RAG: LangChain + embeddings + reranker + Gemini ---
+langchain==1.4.3
+langchain-core==1.6.6
+langchain-text-splitters==1.1.2
+langchain-pinecone==0.2.13
+langchain-google-genai==4.4.0
+fastembed==0.9.0
+pinecone==7.3.0
+requests==2.34.2
+
+# --- Gemini (multimodal image/log analysis) ---
+google-genai==2.26.0
+
+# --- Image handling (incident screenshots) ---
+pillow==12.3.0

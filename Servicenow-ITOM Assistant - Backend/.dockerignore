@@ -1,0 +1,21 @@
+# Keep the Docker build context (and the image) small. Nothing here is
+# read by the running app.
+.env
+.env.*
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+node_modules/
+*.pdf
+*.log
+extracted_pages.jsonl
+all_chunks.jsonl
+flagged_chunks.jsonl
+sample_extraction/
+chunks/*.txt
+scraped_urls.json
+chunk_quality_report.txt
+duplicates_removed_report.txt
+package.json
+pnpm-lock.yaml

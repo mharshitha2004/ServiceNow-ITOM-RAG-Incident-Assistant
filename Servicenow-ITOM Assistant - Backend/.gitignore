@@ -1,0 +1,41 @@
+# Environment variables and API keys
+.env
+.env.*
+!.env.example
+
+# Python virtual environment
+.venv/
+venv/
+env/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# IDE settings
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Large data files (generated during preprocessing)
+chunks/
+sample_extraction/
+*.jsonl
+scraped_urls.json
+chunk_quality_report.txt
+duplicates_removed_report.txt
+extracted_pages.jsonl
+all_chunks.jsonl
+deduplicated_chunks.jsonl
+
+# Logs
+*.log
+
+# Large documentation PDFs
+*.pdf
+
+# Node.js dependencies
+node_modules/

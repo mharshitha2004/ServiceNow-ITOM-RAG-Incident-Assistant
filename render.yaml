@@ -1,0 +1,75 @@
+# Render Blueprint. Connect this repo on Render and it reads this file
+# automatically ("New +" -> "Blueprint"). This file must sit at the TRUE
+# repo root (your monorepo root, alongside both the backend and frontend
+# folders) - Render only looks for render.yaml there, even though the
+# Dockerfile it points to lives one level down, inside the backend folder.
+#
+# Env vars marked `sync: false` need a real value typed into Render's
+# dashboard after the first deploy - they're secrets, so they're never
+# written into this file or committed to the repo. Everything else has
+# a safe default pre-filled; change it in the dashboard if you need to.
+
+services:
+  - type: web
+    name: itom-assistant-backend
+    runtime: docker
+    dockerfilePath: ./Servicenow-ITOM Assistant - Backend/Dockerfile
+    dockerContext: ./Servicenow-ITOM Assistant - Backend
+    plan: free
+    # /health (main.py) answers instantly without touching MongoDB,
+    # Pinecone, Gemini or ServiceNow - cheaper than rendering /docs.
+    healthCheckPath: /health
+    envVars:
+      # --- Critical: without this, login/session cookies silently
+      # won't be sent cross-site between your Vercel frontend and this
+      # Render backend (different domains) - auth will look broken
+      # with no obvious error. See auth.py's COOKIE_SAMESITE/
+      # COOKIE_SECURE logic, which reads this.
+      - key: ENVIRONMENT
+        value: production
+
+      # --- CORS: must list your actual Vercel production URL, e.g.
+      # https://your-project.vercel.app (comma-separate more than one).
+      - key: FRONTEND_ORIGINS
+        sync: false
+
+      # --- Auth ---
+      - key: JWT_SECRET_KEY
+        generateValue: true  # Render generates a random secure value for you
+
+      # --- MongoDB Atlas ---
+      - key: MONGODB_URI
+        sync: false
+      - key: MONGODB_DB_NAME
+        value: Servicenow_itom
+
+      # --- Pinecone ---
+      - key: PINECONE_API_KEY
+        sync: false
+      - key: PINECONE_INDEX_NAME
+        value: servicenow-itom-docs
+
+      # --- Gemini ---
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_FALLBACK_MODELS
+        value: gemini-3.6-flash
+
+      # --- ServiceNow instance (incident flow) ---
+      - key: SERVICENOW_INSTANCE_URL
+        sync: false
+      - key: SERVICENOW_USERNAME
+        sync: false
+      - key: SERVICENOW_PASSWORD
+        sync: false
+      # Must match the group's Name in ServiceNow EXACTLY. The old value
+      # ("IT Operations Management") matched no group, so production
+      # incidents got no Assignment group and no Assigned to.
+      - key: ITOM_ASSIGNMENT_GROUP_NAME
+        value: IT Operations Management L1 team
+      - key: ASSISTANT_CONTACT_TYPE
+        value: virtual_agent
+      # INCIDENT_CLOSE_CODE intentionally omitted - left unset, so
+      # _resolve_close_code() in mcp_server/server.py auto-detects a
+      # real choice from your instance instead of trusting a guess.
+      # Only add this var if you want to force a specific value.

@@ -1,0 +1,26 @@
+{
+  "ingested": [
+    "https://www.servicenow.com/community/cmdb-articles/cmdb-identification-reconciliation/ta-p/2301712",
+    "https://www.servicenow.com/community/cmdb-articles/troubleshooting-discovery/ta-p/3474474",
+    "https://www.servicenow.com/community/cmdb-forum/cmdb-health-dashboard-not-working/m-p/224219",
+    "https://www.servicenow.com/community/developer-forum/how-to-restart-a-mid-server-that-is-in-down-status/td-p/2991693",
+    "https://www.servicenow.com/community/developer-forum/how-to-troubleshoot-discovery/m-p/3166045",
+    "https://www.servicenow.com/community/developer-forum/mid-server-unable-to-start-service/m-p/2827296",
+    "https://www.servicenow.com/community/developer-forum/why-mid-server-status-is-showing-as-down-even-all-the-mid-server/td-p/2618879",
+    "https://www.servicenow.com/community/itom-articles/service-mapping-troubleshooting-tips-and-tricks/ta-p/2321133",
+    "https://www.servicenow.com/community/itom-articles/servicenow-discovery-overview/ta-p/2321453",
+    "https://www.servicenow.com/community/itom-articles/servicenow-duplicate-cis-solution-script-report/ta-p/2319039",
+    "https://www.servicenow.com/community/itom-forum/alert-correlation-rule-not-working-for-flapping-reopend-alerts/td-p/3533026",
+    "https://www.servicenow.com/community/itom-forum/cis-not-getting-discovered-via-quick-discovery-but-not-via/m-p/2763872",
+    "https://www.servicenow.com/community/itom-forum/cmdb-correlation-in-the-event-management/m-p/2498348",
+    "https://www.servicenow.com/community/itom-forum/event-management-alert-correlation-and-management-rules/m-p/3389224",
+    "https://www.servicenow.com/community/itom-forum/event-management-alert-handling/m-p/3350262",
+    "https://www.servicenow.com/community/itom-forum/event-management-correlation-behavior-after-7-days/m-p/3519521",
+    "https://www.servicenow.com/community/itom-forum/how-to-group-alerts-with-a-different-correlation-rules-without/m-p/3353315",
+    "https://www.servicenow.com/community/itom-forum/midserver-often-goes-down/m-p/903686",
+    "https://www.servicenow.com/community/itom-forum/servicenow-discovery-not-identifying-all-expected-cis/m-p/3103344",
+    "https://www.servicenow.com/community/itom-forum/why-mid-server-showing-down-while-service-is-still-running/m-p/931482",
+    "https://www.servicenow.com/community/itsm-forum/how-to-restrict-duplicate-ci-creation-on-cmdb-ci-server/td-p/3449634",
+    "https://www.servicenow.com/community/virtual-agent-forum/issue-with-mid-server/td-p/3489514"
+  ]
+}

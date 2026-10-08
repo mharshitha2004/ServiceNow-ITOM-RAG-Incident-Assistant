@@ -1,0 +1,289 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --color-violet: var(--violet);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
+  Premium ServiceNow-green palette, in two modes.
+
+  :root holds the LIGHT theme (new); .dark holds the original dark navy
+  theme, unchanged. Toggled by adding/removing the "dark" class on <html>
+  (see lib/theme-context.tsx) - :root's values apply whenever .dark is
+  absent, so light mode needs no extra selector of its own.
+*/
+
+:root {
+  color-scheme: light;
+
+  --background: #F5F8F7;
+  --foreground: #0B2019;
+
+  --card: #FFFFFF;
+  --card-foreground: #0B2019;
+
+  --popover: #FFFFFF;
+  --popover-foreground: #0B2019;
+
+  /* ServiceNow green (brand primary) - a touch deeper than the dark-mode
+     value so it holds contrast against a light background. */
+  --primary: #219B3A;
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #EAF0EE;
+  --secondary-foreground: #0B2019;
+
+  --muted: #EAF0EE;
+  --muted-foreground: #4C635C;
+
+  --accent: #E1F3E4;
+  --accent-foreground: #0B2019;
+
+  --violet: #17803A;
+
+  --destructive: oklch(0.58 0.22 25);
+
+  --border: rgba(11, 32, 25, 0.12);
+  --input: rgba(11, 32, 25, 0.08);
+
+  --ring: oklch(0.58 0.18 142);
+
+  --chart-1: oklch(0.58 0.18 142);
+  --chart-2: oklch(0.55 0.17 140);
+  --chart-3: oklch(0.55 0.12 190);
+  --chart-4: oklch(0.5 0.11 175);
+  --chart-5: oklch(0.62 0.12 100);
+
+  --radius: 0.75rem;
+
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #0B2019;
+  --sidebar-primary: oklch(0.58 0.18 142);
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #E1F3E4;
+  --sidebar-accent-foreground: #0B2019;
+  --sidebar-border: rgba(11, 32, 25, 0.1);
+  --sidebar-ring: oklch(0.58 0.18 142);
+
+  /* .text-gradient's stops (see @layer utilities below) - light mode
+     goes dark-navy -> green so the text stays legible on a light page. */
+  --gradient-text-1: #0B2019;
+  --gradient-text-2: #2FAE3D;
+  --gradient-text-3: #59D84A;
+  --gradient-text-4: #17803A;
+}
+
+.dark {
+  color-scheme: dark;
+
+  /* ServiceNow-inspired dark navy / teal */
+  --background: #061C24;
+  --foreground: #F1F7F8;
+
+  --card: #092833;
+  --card-foreground: oklch(0.97 0.008 210);
+
+  --popover: oklch(0.19 0.04 215);
+  --popover-foreground: oklch(0.97 0.008 210);
+
+  /* ServiceNow green (brand primary) */
+  --primary: #59D84A;
+  --primary-foreground: oklch(0.99 0.005 210);
+
+  --secondary: oklch(0.25 0.045 215);
+  --secondary-foreground: oklch(0.97 0.008 210);
+
+  --muted: oklch(0.24 0.035 215);
+  --muted-foreground: #91AEB7;
+
+  --accent: oklch(0.29 0.055 215);
+  --accent-foreground: oklch(0.98 0.005 210);
+
+  /* Deeper green - second gradient stop (was violet) */
+  --violet: #2FAE3D;
+
+  --destructive: oklch(0.65 0.2 25);
+
+  --border: rgba(100, 210, 220, 0.12);
+  --input: oklch(1 0 0 / 12%);
+
+  --ring: oklch(0.78 0.21 142);
+
+  /* Charts */
+  --chart-1: oklch(0.78 0.21 142);
+  --chart-2: oklch(0.72 0.19 140);
+  --chart-3: oklch(0.72 0.13 190);
+  --chart-4: oklch(0.62 0.12 175);
+  --chart-5: oklch(0.78 0.12 100);
+
+  --radius: 0.75rem;
+
+  /* Sidebar */
+  --sidebar: oklch(0.17 0.038 218);
+  --sidebar-foreground: oklch(0.97 0.008 210);
+  --sidebar-primary: oklch(0.78 0.21 142);
+  --sidebar-primary-foreground: oklch(0.99 0.005 210);
+  --sidebar-accent: oklch(0.29 0.055 215);
+  --sidebar-accent-foreground: oklch(0.98 0.005 210);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.78 0.21 142);
+
+  /* .text-gradient's stops - dark mode goes soft-white -> green. */
+  --gradient-text-1: #DDF5F8;
+  --gradient-text-2: #8FE39B;
+  --gradient-text-3: #59D84A;
+  --gradient-text-4: #2FAE3D;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  /* =========================================
+     Gradient text
+     Theme-aware - see --gradient-text-* above
+     ========================================= */
+
+  .text-gradient {
+    background-image: linear-gradient(
+      100deg,
+      var(--gradient-text-1) 0%,
+      var(--gradient-text-2) 35%,
+      var(--gradient-text-3) 70%,
+      var(--gradient-text-4) 100%
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* =========================================
+     Existing blue glow
+     ========================================= */
+
+  .glow-blue {
+    box-shadow: 0 0 80px -20px oklch(0.68 0.16 215 / 40%);
+  }
+
+  /* =========================================
+     ServiceNow green glow
+     ========================================= */
+
+  .glow-green {
+    box-shadow:
+      0 0 80px -25px rgba(89, 216, 74, 0.35),
+      0 0 140px -45px rgba(0, 191, 166, 0.25);
+  }
+
+  /* =========================================
+     Subtle green highlight
+     ========================================= */
+
+  .green-accent {
+    color: #59D84A;
+  }
+
+  /* =========================================
+     Background grid
+     ========================================= */
+
+  .bg-grid {
+    background-image:
+      linear-gradient(
+        to right,
+        oklch(1 0 0 / 4%) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        oklch(1 0 0 / 4%) 1px,
+        transparent 1px
+      );
+
+    background-size: 56px 56px;
+  }
+}
+
+/* =========================================
+   Typing animation
+   ========================================= */
+
+@keyframes typing-bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+.typing-dot {
+  animation: typing-bounce 1.2s infinite ease-in-out;
+}
+
+html {
+  font-size: 100%;
+}
+
+/* Scale up on wide screens */
+@media (min-width: 1536px) {
+  html {
+    font-size: 120%;
+  }
+}

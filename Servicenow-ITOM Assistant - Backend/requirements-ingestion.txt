@@ -1,0 +1,15 @@
+# Extra dependencies for the ingestion/ scripts (pdf_ingest.py,
+# scrape_servicenow_sources.py, ingest_specific_urls.py). These are run
+# locally on your machine, never deployed - install this ON TOP OF
+# requirements.txt when you want to run an ingestion script:
+#
+#   pip install -r requirements.txt -r requirements-ingestion.txt
+
+pymupdf==1.28.2
+beautifulsoup4==4.15.0
+langchain-community==0.4.2
+# Only for verify_embeddings.py (compares fastembed against the original
+# PyTorch model) and the legacy embed_and_upload.py script. The deployed
+# app does NOT need these - that's the point.
+sentence-transformers==6.1.0
+langchain-huggingface==1.2.2
