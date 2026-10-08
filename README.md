@@ -190,8 +190,8 @@ This project is a **documentation-first** assistant. Every question goes to the 
 ### 1. Clone
 
 ```bash
-git clone https://github.com/harshitha2004-ml/Servicenow_ITOM.git
-cd Servicenow_ITOM
+git clone https://github.com/mharshitha2004/ServiceNow-ITOM-RAG-Incident-Assistant.git
+cd ServiceNow-ITOM-RAG-Incident-Assistant
 ```
 
 ### 2. Backend
@@ -362,7 +362,7 @@ Each script supports `--dry-run`, which shows the chunks it would create without
 
 ## Author
 
-**Mandadi Harshitha Reddy**: B.Tech CSE (Gold Medallist), ServiceNow CSA and CAD certified, former Associate Technical Support Engineer on ServiceNow ITOM.
+**Mandadi Harshitha Reddy**: B.Tech CSE, ServiceNow CSA and CAD certified, former Associate Technical Support Engineer at ServiceNow.
 
 If you found this project interesting, consider giving it a ⭐
 
